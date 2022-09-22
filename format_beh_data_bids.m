@@ -1,17 +1,18 @@
-basedir = '/Users/zacharyanderson/Documents/ACNlab/Georgia/projects/b1108/data/Georgia/*';
+basedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE';
 
 mid = 1;
-chat = 0;
-make_plot = 1;
-save_output = 0;
+chat = 1;
+make_plot = 0;
+save_output = 1;
 
 if chat == 1
     fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/chzc*txt'));
 
     for sub = 1:length(fnames)
         txt = readtable(fnames{1});
-        pid{sub} = fnames{sub}(81:85);%(82:87); (81:85);
-        
+        pid{sub} = fnames{sub}(60:64);% CREST (61:66);  Georgia (81:86); RISE (60:64)
+        func_dir = fullfile(basedir,strcat('sub-',pid{sub},'/ses-1/func/'));
+        mkdir(func_dir);
         % remove certain fields that make indexing more difficult
 
         % cue onset and duration
@@ -76,7 +77,7 @@ if chat == 1
         final_chat.Properties.VariableNames = {'onset','duration','shwt_onset'};
         final_chat = [final_chat,trial_type];
         
-        curr_filename = fullfile(basedir, strcat('sub-',pid{sub},'/ses-1/func/sub-',pid{sub},'_ses-1_task-chatroom_events.txt'));   
+        curr_filename = fullfile(basedir, strcat('sub-',pid{sub},'/ses-1/func/sub-',pid{sub},'_ses-1_task-chatroom_run-01_events.txt'));   
         writetable(final_chat,curr_filename,'delimiter','tab')
     end
 
@@ -89,8 +90,9 @@ if mid == 1
     for sub = 1:length(fnames)
         % Load in the text file
         txt = readtable(fnames{sub});
-
-        pid{sub} =  fnames{sub}(81:86);% CREST (82:87);  Georgia (81:86); RISE (81:85)
+        pid{sub} =  fnames{sub}(60:64);% CREST (61:66);  Georgia (81:86); RISE (60:64)
+        func_dir = fullfile(basedir,strcat('sub-',pid{sub},'/ses-1/func/'));
+        mkdir(func_dir);
         if isempty(txt) == 0
             
             % get rid of fields that overlap in inconvenient ways. I want to
@@ -206,12 +208,12 @@ if mid == 1
             end
             rt_avg(sub,1) = nanmean(all_response_time);
             acc(sub,1) = nansum(all_acc) / length(all_acc);
-            target_RTs_all(sub,:) = [target_RT1',target_RT2'];
+            %target_RTs_all(sub,:) = [target_RT1',target_RT2'];
         else
             fprintf(strcat('No MID data for: ',fnames{sub},'\n'))
             rt_avg(sub,1) = NaN;
             acc(sub,1) = NaN;
-            target_RTs_all(sub,:) = NaN;
+            %target_RTs_all(sub,:) = NaN;
         end
         
     end
