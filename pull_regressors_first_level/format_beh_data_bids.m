@@ -1,96 +1,79 @@
-basedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE';
+basedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/behavioral';
+savedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/timing_files';
 
-mid = 1;
+mid = 0;
 chat = 1;
 make_plot = 0;
 save_output = 1;
 
 if chat == 1
     fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/chzc*txt'));
-
+    keyboard
     for sub = 1:length(fnames)
-        txt = readtable(fnames{1});
-        pid{sub} = fnames{sub}(60:64);% CREST (61:66);  Georgia (81:86); RISE (60:64)
+        txt = readtable(fnames{sub});
+        
+        pid{sub} = fnames{sub}(71:75); % RISE %(72:77);% CREST (71:75); %
         func_dir = fullfile(basedir,strcat('sub-',pid{sub},'/ses-1/func/'));
         mkdir(func_dir);
         % remove certain fields that make indexing more difficult
-
-        % cue onset and duration
-        trial_type = string(txt.Var2(find(contains(txt.Var1,'TopicNumber'))));
-        
-        trial_type = replace(trial_type,'10','Computers');
-        trial_type = replace(trial_type,'11','Pets');
-        trial_type = replace(trial_type,'12','Books');
-        trial_type = replace(trial_type,'13','Friends');
-        trial_type = replace(trial_type,'14','Family');
-        trial_type = replace(trial_type,'15','Sports');
-        trial_type = replace(trial_type,'1','School');
-        trial_type = replace(trial_type,'2','Parties');
-        trial_type = replace(trial_type,'3','Vacations');
-        trial_type = replace(trial_type,'4','Hobbies');
-        trial_type = replace(trial_type,'5','Music');
-        trial_type = replace(trial_type,'6','TV');
-        trial_type = replace(trial_type,'7','Movies');
-        trial_type = replace(trial_type,'8','Food');
-        trial_type = replace(trial_type,'9','Shopping');
+         
 
         chzt_on = txt.Var2(find(contains(txt.Var1,'ChzT.OnsetTime')));
-        chzt_rt = txt.Var2(find(contains(txt.Var1,'ChzT.RT')));
         chzt_resp = txt.Var2(find(contains(txt.Var1,'ChzT.RESP')));
         chzt6_on = txt.Var2(find(contains(txt.Var1,'ChzT6.OnsetTime')));
-        chzt6_rt = txt.Var2(find(contains(txt.Var1,'ChzT6.RT')));
         chzt6_resp = txt.Var2(find(contains(txt.Var1,'ChzT6.RESP')));
+        
+        selSub = txt.Var2(find(contains(txt.Var1,'SelSubj')));
+        othSub = txt.Var2(find(contains(txt.Var1,'SelOth')));
 
         shwt_on = txt.Var2(find(contains(txt.Var1,'ShwT.OnsetTime')));
-        shwt_rt = txt.Var2(find(contains(txt.Var1,'ShwT.RT')));
         shwt_resp = txt.Var2(find(contains(txt.Var1,'ShwT.RESP')));
         shwt2_on = txt.Var2(find(contains(txt.Var1,'Shw2.OnsetTime')));
-        shwt2_rt = txt.Var2(find(contains(txt.Var1,'Shw2.RT')));
         shwt2_resp = txt.Var2(find(contains(txt.Var1,'Shw2.RESP')));
         shwt6_on = txt.Var2(find(contains(txt.Var1,'Shw6.OnsetTime')));
-        shwt6_rt = txt.Var2(find(contains(txt.Var1,'Shw6.RT')));
         shwt6_resp = txt.Var2(find(contains(txt.Var1,'Shw6.RESP')));
 
-        all_chzt_on = [chzt_on;chzt6_on];
-        all_shwt_on = [shwt_on;shwt2_on;shwt6_on];
-        all_chzt_type = [ones(length(chzt_on),1);ones(length(chzt6_on),1).*2];
-        all_shwt_type = [ones(length(shwt_on),1).*3;ones(length(shwt2_on),1).*4;ones(length(shwt6_on),1).*5];
-        all_chzt_dur = [ones(length(chzt_on),1).*3000;ones(length(chzt6_on),1).*3000];
-        all_shwt_dur = [ones(length(shwt_on),1).*7500;ones(length(shwt2_on),1).*7500;ones(length(shwt6_on),1).*7500];
-        all_chzt_rt = [chzt_rt;chzt6_rt];
-        all_shwt_rt = [shwt_rt;shwt2_rt;shwt6_rt];
-        all_chzt_resp = [chzt_resp;chzt6_resp];
-        all_shwt_resp = [shwt_resp;shwt2_resp;shwt6_resp];
+        selb2 = selSub(1:15);
+        selb3 = selSub(16:30);
+        selb4 = selSub(31:45);
+        chzb1 = (chzt_on(1:15)- chzt_on(1))./1000;
+        chzb2 = (chzt_on(16:30)- chzt_on(1))./1000;
+        chzb3 = (chzt_on(31:45)- chzt_on(1))./1000;
+        chzb4 = (chzt6_on- chzt_on(1))./1000;
+        showb1 = (shwt_on(1:15) - chzt_on(1))./1000;
+        showb2 = (shwt2_on(1:15) - chzt_on(1))./1000;
+        showb3 = (shwt2_on(16:30) - chzt_on(1))./1000;
+        showb4 = (shwt6_on - chzt_on(1))./1000;
         
-        % create final variables
-        onset = (all_chzt_on - all_chzt_on(1)) ./ 1000;
-        shwt_onset = (all_shwt_on - all_chzt_on(1)) ./ 1000;
-        duration = (all_chzt_dur + all_shwt_dur) ./ 1000;
-
-        for t = 1:length(trial_type)
-            ctrial_type{t,1} = trial_type(t,1);
-        end
-        trial_type = cell2table(ctrial_type); trial_type.Properties.VariableNames = {'type'};
-
-        final_chat = [onset,duration,shwt_onset];
-        final_chat = array2table(final_chat);
-        final_chat.Properties.VariableNames = {'onset','duration','shwt_onset'};
-        final_chat = [final_chat,trial_type];
+        showb2_rej = showb2(selb2==0);
+        showb2_acc = showb2(selb2==2);
+        showb3_rej = showb3(selb3==0);
+        showb3_acc = showb3(selb3==2);
         
-        curr_filename = fullfile(basedir, strcat('sub-',pid{sub},'/ses-1/func/sub-',pid{sub},'_ses-1_task-chatroom_run-01_events.txt'));   
-        writetable(final_chat,curr_filename,'delimiter','tab')
+        names = {'Rejection','Acceptance','ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow','ControlShow'};
+      
+        onsets{1} = [showb2_rej',showb3_rej']; onsets{2} = [showb2_acc',showb3_acc'];
+        onsets{3} = chzb1; onsets{4} = [chzb2,chzb3]; onsets{5} = chzb4; onsets{6} = showb1; onsets{7} = showb4;
+
+        durations{1} = ones(1,length(onsets{1})).*4;durations{2} = ones(1,length(onsets{2})).*4;
+        durations{3} = ones(1,length(onsets{3})).*4;durations{4} = ones(1,length(onsets{4})).*4;
+        durations{5} = ones(1,length(onsets{5})).*4;durations{6} = ones(1,length(onsets{6})).*4;
+        durations{7} = ones(1,length(onsets{7})).*4;
+
+        curr_filename = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-chatroom_run-1_timing.mat'));   
+        save(curr_filename,'onsets','durations','names')
+        
     end
-
 end
 
 
 if mid == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/3_MID*txt'));
+    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/3_*txt'));
 
     for sub = 1:length(fnames)
         % Load in the text file
         txt = readtable(fnames{sub});
-        pid{sub} =  fnames{sub}(60:64);% CREST (61:66);  Georgia (81:86); RISE (60:64)
+        pid{sub} =  fnames{sub}(71:75); % RISE %(72:77);% CREST (71:75); %
         func_dir = fullfile(basedir,strcat('sub-',pid{sub},'/ses-1/func/'));
         mkdir(func_dir);
         if isempty(txt) == 0
