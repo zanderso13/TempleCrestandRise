@@ -7,7 +7,7 @@
 scriptdir = '/projects/b1108/studies/rise/data/processed/neuroimaging/scriptdir';
 basedir = '/projects/b1108/studies/rise/data/processed/neuroimaging';
 % What run of your task are you looking at?
-run = 2;
+run = 1;
 % What session appears in your raw filenames when in BIDS format?
 ses = 2;
 % Do you want to overwrite previously estimated first levels or just add to
@@ -15,7 +15,7 @@ ses = 2;
 overwrite = 0;
 
 % rest, consumption, anticipation
-contrast = 'outcome'; % anticipation, outcome, chatroom
+contrast = 'anticipation'; % anticipation, outcome, chatroom
 
 %%
 fnames = filenames(fullfile(basedir,strcat('/smoothed_data/ssub*ses-',num2str(ses),'*mid*run-0',num2str(run),'*')));

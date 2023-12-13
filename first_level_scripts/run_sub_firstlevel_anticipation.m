@@ -7,14 +7,14 @@ if nargin==0 % defaults just for testing
 end
 
 overwrite = 1;
-ses = 1;
-run = 1;
+ses = 2;
+run = 2;
 ndummies = 0;
 
 contrast = 'anticipation'; % consumption
 
 % Define some paths
-basedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE';
+basedir = '/projects/b1108/studies/rise/data/processed/neuroimaging';
 
 preproc_dir = fullfile(basedir,'smoothed_data/');
 
