@@ -30,5 +30,9 @@ matlabbatch{3}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
 matlabbatch{3}.spm.stats.con.consess{2}.tcon.name = 'LossAnticipation';
 matlabbatch{3}.spm.stats.con.consess{2}.tcon.weights = [0 0 1 -1];
 matlabbatch{3}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
+matlabbatch{3}.spm.stats.con.consess{3}.tcon.name = 'GainVsLoss';
+matlabbatch{3}.spm.stats.con.consess{3}.tcon.weights = [1 0 -1];
+matlabbatch{3}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
+
 
 matlabbatch{3}.spm.stats.con.delete = 1;

@@ -25,7 +25,7 @@ fprintf(['Preparing 1st level model for ' PID ' / ' ses], ['Overwrite = ' num2st
 
 %% Model for MID task. First pass at first levels --> activation
 % FL directory for saving 1st level results: beta images, SPM.mat, contrasts, etc.
-in{1} = {fullfile(basedir, '/fl/', PID, strcat('ses-',num2str(ses)), 'chatroom2/', strcat('run-', num2str(run)))};
+in{1} = {fullfile(basedir, '/fl/', PID, strcat('ses-',num2str(ses)), 'chatroom/', strcat('run-', num2str(run)))};
 
 % preproc images
 in{2} = cellstr(spm_select('ExtFPList', preproc_dir, strcat('^ssub-',num2str(numPID),'_ses-',num2str(ses),'_task-chatroom_run-0',num2str(run),'_space-MNI152NLin2009cAsym_desc-preproc_bold.nii'), ndummies+1:9999));
