@@ -1,5 +1,5 @@
-basedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/behavioral';
-savedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/timing_files';
+basedir = '/projects/b1108/studies/rise/data/processed/neuroimaging/behavioral';
+savedir = '/projects/b1108/studies/rise/data/processed/neuroimaging/timing_files';
 
 mid = 0;
 chat = 0;
@@ -7,12 +7,12 @@ chat_matlab = 1;
 make_plot = 0;
 
 if chat == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-2/beh/chzc*txt'));
+    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/chzc*txt'));
     keyboard
     for sub = 1:length(fnames)
         txt = readtable(fnames{sub});
         
-        pid{sub} = fnames{sub}(71:75); % RISE %(72:77);% CREST (71:75); %
+        pid{sub} = fnames{sub}(73:77); % RISE %(72:77);% CREST (71:75); %
         
         % remove certain fields that make indexing more difficult
          
@@ -58,17 +58,17 @@ if chat == 1
         showb3_rej = showb3(selb3==0);
         showb3_acc = showb3(selb3==2);
         
-        names = {'Rejection','Acceptance','ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow','ControlShow'};
+        names = {'Rejection','Acceptance','ControlShow'};%,'ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow'};
       
         onsets{1} = [showb2_rej',showb3_rej']+4.05; onsets{2} = [showb2_acc',showb3_acc']+4.05;
-        onsets{3} = chzb1'+4.05; onsets{4} = [chzb2',chzb3']+4.05; onsets{5} = chzb4'+4.05; onsets{6} = showb1'+4.05; onsets{7} = showb4'+4.05;
+        onsets{3} = showb4'+4.05; %onsets{4} = chzb1'+4.05; onsets{5} = [chzb2',chzb3']+4.05; onsets{6} = chzb4'+4.05; onsets{7} = showb1'+4.05; 
 
         durations{1} = ones(1,length(onsets{1})).*4;durations{2} = ones(1,length(onsets{2})).*4;
-        durations{3} = ones(1,length(onsets{3})).*4;durations{4} = ones(1,length(onsets{4})).*4;
-        durations{5} = ones(1,length(onsets{5})).*4;durations{6} = ones(1,length(onsets{6})).*4;
-        durations{7} = ones(1,length(onsets{7})).*4;
+        durations{3} = ones(1,length(onsets{3})).*4;%durations{4} = ones(1,length(onsets{4})).*4;
+        %durations{5} = ones(1,length(onsets{5})).*4;durations{6} = ones(1,length(onsets{6})).*4;
+        %durations{7} = ones(1,length(onsets{7})).*4;
 
-        curr_filename = fullfile(savedir, strcat('sub-',pid{sub},'_ses-2_task-chatroom_run-1_timing.mat'));   
+        curr_filename = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-chatroom_run-1_timing.mat'));   
         save(curr_filename,'onsets','durations','names')
         
     end
@@ -76,7 +76,7 @@ end
 
 
 if mid == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-2/beh/3_*txt'));
+    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/3_*txt'));
     keyboard
     for sub = 1:length(fnames)
         % Load in the text file
@@ -141,7 +141,7 @@ if mid == 1
                 names{1} = 'GainAnticipation';names{2} = 'Gain0Anticipation';
                 names{3} = 'LossAnticipation';names{4} = 'Loss0Anticipation';
                 names{5} = 'Motor';
-                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-2_task-mid_run-1_anticipation_timing.mat'));   
+                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-mid_run-1_anticipation_timing.mat'));   
                 save(tempfname,'onsets','durations','names')
                 clear onsets durations names
 
@@ -157,7 +157,7 @@ if mid == 1
                 names{1} = 'GainAnticipation';names{2} = 'Gain0Anticipation';
                 names{3} = 'LossAnticipation';names{4} = 'Loss0Anticipation';
                 names{5} = 'Motor';
-                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-2_task-mid_run-2_anticipation_timing.mat'));   
+                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-mid_run-2_anticipation_timing.mat'));   
                 save(tempfname,'onsets','durations','names')
                 clear onsets durations names
 
@@ -176,7 +176,7 @@ if mid == 1
                 names{1} = 'SuccessWin';names{2} = 'UnsuccessWin';
                 names{3} = 'SuccessLoss';names{4} = 'UnsuccessLoss';
                 names{5} = 'Motor';
-                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-2_task-mid_run-1_outcome_timing.mat'));   
+                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-mid_run-1_outcome_timing.mat'));   
                 save(tempfname,'onsets','durations','names')
                 clear onsets durations names corrfbk1 corrtype1 incorrfbk1 incorrtype1
                 
@@ -195,7 +195,7 @@ if mid == 1
                 names{1} = 'SuccessWin';names{2} = 'UnsuccessWin';
                 names{3} = 'SuccessLoss';names{4} = 'UnsuccessLoss';
                 names{5} = 'Motor';
-                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-2_task-mid_run-2_outcome_timing.mat'));   
+                tempfname = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-mid_run-2_outcome_timing.mat'));   
                 save(tempfname,'onsets','durations','names')
                 clear onsets durations names corrfbk2 corrtype2 incorrfbk2 incorrtype2
                 
@@ -215,11 +215,11 @@ if mid == 1
 end
 
 if chat_matlab == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-2/beh/*.csv'));
+    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/*.csv'));
     for sub = 1:length(fnames)
-        pid{sub} = fnames{sub}(71:75);
+        pid{sub} = fnames{sub}(73:77);
         T = readtable(fnames{sub});
-        names = {'Rejection','Acceptance','ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow','ControlShow'};
+        names = {'Rejection','Acceptance','ControlShow'};%,'ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow'};
         chzT = T.trialOnset;
         chzTb1 = chzT(1:15);chzTb2 = chzT(16:30);chzTb3 = chzT(31:45);chzTb4 = chzT(46:60);
         shwT = T.trialFeedbackOnset;
@@ -230,17 +230,16 @@ if chat_matlab == 1
         acc = [shwTb2(strcmp(selected_personb2,participant))', shwTb3(strcmp(selected_personb3,participant))'];
         rej = [shwTb2(~strcmp(selected_personb2,participant))', shwTb3(~strcmp(selected_personb3,participant))'];
         
-        names = {'Rejection','Acceptance','ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow','ControlShow'};
         
         onsets{1} = rej; onsets{2} = acc;
-        onsets{3} = chzTb1'; onsets{4} = [chzTb2',chzTb3']; onsets{5} = chzTb4'; onsets{6} = shwTb1'; onsets{7} = shwTb4';
+        onsets{3} = shwTb4'; %onsets{4} = chzTb1'; onsets{5} = [chzTb2',chzTb3']; onsets{6} = chzTb4'; onsets{7} = shwTb1'; 
 
         durations{1} = ones(1,length(onsets{1})).*4;durations{2} = ones(1,length(onsets{2})).*4;
-        durations{3} = ones(1,length(onsets{3})).*4;durations{4} = ones(1,length(onsets{4})).*4;
-        durations{5} = ones(1,length(onsets{5})).*4;durations{6} = ones(1,length(onsets{6})).*4;
-        durations{7} = ones(1,length(onsets{7})).*4;
+        durations{3} = ones(1,length(onsets{3})).*4;%durations{4} = ones(1,length(onsets{4})).*4;
+        %durations{5} = ones(1,length(onsets{5})).*4;durations{6} = ones(1,length(onsets{6})).*4;
+        %durations{7} = ones(1,length(onsets{7})).*4;
 
-        curr_filename = fullfile(savedir, strcat('sub-',pid{sub},'_ses-2_task-chatroom_run-1_timing.mat'));   
+        curr_filename = fullfile(savedir, strcat('sub-',pid{sub},'_ses-1_task-chatroom_run-1_timing.mat'));   
         save(curr_filename,'onsets','durations','names')
     end
 end
