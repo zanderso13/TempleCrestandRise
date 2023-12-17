@@ -328,6 +328,8 @@ if remake_data_obj == 1
     for sub = 1:length(fchat_s2_accrej)
         pid_chat_s2{sub} = fchat_s2_accrej{sub}(5:9);
     end
+
+    save pids.mat pid_midant_s1 pid_midant_s2 pid_midout_s1 pid_midout_s2 pid_chat_s1 pid_chat_s2
     %% save all MID ses1
     save final_data_midant_ses1_c1.mat final_data_midant_ses1_c1
     save final_data_midant_ses1_c2.mat final_data_midant_ses1_c2
