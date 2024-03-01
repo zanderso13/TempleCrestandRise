@@ -1,8 +1,8 @@
 basedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/behavioral';
 savedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/timing_files';
 
-mid = 1;
-chat = 0;
+mid = 0;
+chat = 1;
 chat_matlab = 0;
 cd(basedir)
 
@@ -76,7 +76,7 @@ end
 
 
 if mid == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/3_*txt'));
+    fnames = filenames(fullfile('sub-*/ses-1/beh/3_*txt'));
     keyboard
     for sub = 1:length(fnames)
         % Load in the text file
@@ -215,9 +215,9 @@ if mid == 1
 end
 
 if chat_matlab == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/*.csv'));
+    fnames = filenames(fullfile('sub-*/ses-1/beh/*.csv'));
     for sub = 1:length(fnames)
-        pid{sub} = fnames{sub}(71:75);
+        pid{sub} = fnames{sub}(5:9);
         T = readtable(fnames{sub});
         names = {'Rejection','Acceptance','ParticipantChoice','OtherChoice','ControlChoice','ParticipantShow','ControlShow'};
         chzT = T.trialOnset;
