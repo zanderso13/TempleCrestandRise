@@ -1,6 +1,7 @@
 fldir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/contrast_to_transfer';
+datadir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/final_mats';
 
-remake_data_obj = 1;
+remake_data_obj = 0;
 
 if remake_data_obj == 1
 
@@ -356,28 +357,28 @@ if remake_data_obj == 1
     save final_data_chatroom_ses2_rej.mat final_data_chatroom_ses2_rej
 
 else
-    load(fullfile(fldir,"final_data_midant_ses1_c1.mat"))
-    load(fullfile(fldir,"final_data_midant_ses1_c2.mat"))
-    load(fullfile(fldir,"final_data_midant_ses1_c3.mat"))
-    load(fullfile(fldir,"final_data_midout_ses1_c1.mat"))
-    load(fullfile(fldir,"final_data_midout_ses1_c2.mat"))
-    load(fullfile(fldir,"final_data_midout_ses1_c3.mat"))
+    load(fullfile(datadir,"final_data_midant_ses1_c1.mat"))
+    load(fullfile(datadir,"final_data_midant_ses1_c2.mat"))
+    load(fullfile(datadir,"final_data_midant_ses1_c3.mat"))
+    load(fullfile(datadir,"final_data_midout_ses1_c1.mat"))
+    load(fullfile(datadir,"final_data_midout_ses1_c2.mat"))
+    load(fullfile(datadir,"final_data_midout_ses1_c3.mat"))
 
-    load(fullfile(fldir,"final_data_midant_ses2_c1.mat"))
-    load(fullfile(fldir,"final_data_midant_ses2_c2.mat"))
-    load(fullfile(fldir,"final_data_midant_ses2_c3.mat"))
-    load(fullfile(fldir,"final_data_midout_ses2_c1.mat"))
-    load(fullfile(fldir,"final_data_midout_ses2_c2.mat"))
-    load(fullfile(fldir,"final_data_midout_ses2_c3.mat"))
+    load(fullfile(datadir,"final_data_midant_ses2_c1.mat"))
+    load(fullfile(datadir,"final_data_midant_ses2_c2.mat"))
+    load(fullfile(datadir,"final_data_midant_ses2_c3.mat"))
+    load(fullfile(datadir,"final_data_midout_ses2_c1.mat"))
+    load(fullfile(datadir,"final_data_midout_ses2_c2.mat"))
+    load(fullfile(datadir,"final_data_midout_ses2_c3.mat"))
 
-    load(fullfile(fldir,"final_data_chatroom_ses1_accrej.mat"))
-    load(fullfile(fldir,"final_data_chatroom_ses1_acc.mat"))
-    load(fullfile(fldir,"final_data_chatroom_ses1_rej.mat"))
-    load(fullfile(fldir,"final_data_chatroom_ses2_accrej.mat"))
-    load(fullfile(fldir,"final_data_chatroom_ses2_acc.mat"))
-    load(fullfile(fldir,"final_data_chatroom_ses2_rej.mat"))
+    load(fullfile(datadir,"final_data_chatroom_ses1_accrej.mat"))
+    load(fullfile(datadir,"final_data_chatroom_ses1_acc.mat"))
+    load(fullfile(datadir,"final_data_chatroom_ses1_rej.mat"))
+    load(fullfile(datadir,"final_data_chatroom_ses2_accrej.mat"))
+    load(fullfile(datadir,"final_data_chatroom_ses2_acc.mat"))
+    load(fullfile(datadir,"final_data_chatroom_ses2_rej.mat"))
 
-    load(fullfile(fldir,"pids.mat"));
+    load(fullfile(datadir,"pids.mat"));
 
 %     load(fullfile(fldir,"final_data_chatroom2_ses1_accrej.mat"))
 %     load(fullfile(fldir,"final_data_chatroom2_ses2_accrej.mat"))
@@ -475,7 +476,7 @@ if redo_regions == 1
     T_chats1accrej.Properties.VariableNames = names;
     T_chats1accrej = [cell2table(pid_chat_s1'), T_chats1accrej];
     T_chats1accrej.Properties.VariableNames{1} = 'PID';
-    save chats1accrej_T.mat T_chats1accrej
+    save T_chats1accrej.mat T_chats1accrej
 
     % chatroom acc ses1
     T_chats1acc = [];
@@ -492,7 +493,7 @@ if redo_regions == 1
     T_chats1acc.Properties.VariableNames = names;
     T_chats1acc = [cell2table(pid_chat_s1'), T_chats1acc];
     T_chats1acc.Properties.VariableNames{1} = 'PID';
-    save chats1acc_T.mat T_chats1acc
+    save T_chats1acc.mat T_chats1acc
 
     % chatroom rej ses1
     T_chats1rej = [];
@@ -509,7 +510,7 @@ if redo_regions == 1
     T_chats1rej.Properties.VariableNames = names;
     T_chats1rej = [cell2table(pid_chat_s1'), T_chats1rej];
     T_chats1rej.Properties.VariableNames{1} = 'PID';
-    save chats1rej_T.mat T_chats1rej
+    save T_chats1rej.mat T_chats1rej
     %%
     % chatroom accrej ses2
     T_chats2accrej = [];
@@ -526,7 +527,7 @@ if redo_regions == 1
     T_chats2accrej.Properties.VariableNames = names;
     T_chats2accrej = [cell2table(pid_chat_s2'), T_chats2accrej];
     T_chats2accrej.Properties.VariableNames{1} = 'PID';
-    save chats2accrej_T.mat T_chats2accrej
+    save T_chats2accrej.mat T_chats2accrej
 
     % chatroom acc ses2
     T_chats2acc = [];
@@ -543,7 +544,7 @@ if redo_regions == 1
     T_chats2acc.Properties.VariableNames = names;
     T_chats2acc = [cell2table(pid_chat_s2'), T_chats2acc];
     T_chats2acc.Properties.VariableNames{1} = 'PID';
-    save chats2acc_T.mat T_chats2acc
+    save T_chats2acc.mat T_chats2acc
 
     % chatroom rej ses2
     T_chats2rej = [];
@@ -560,7 +561,7 @@ if redo_regions == 1
     T_chats2rej.Properties.VariableNames = names;
     T_chats2rej = [cell2table(pid_chat_s2'), T_chats2rej];
     T_chats2rej.Properties.VariableNames{1} = 'PID';
-    save chats1rej_T.mat T_chats1rej
+    save T_chats2rej.mat T_chats2rej
     %%
     % mid ant ses1 c1
     T_midants1_c1 = [];
@@ -612,7 +613,7 @@ if redo_regions == 1
     pid_midant_s1 = pid_midant_s1(~cellfun('isempty',pid_midant_s1));
     T_midants1_c3 = [cell2table(pid_midant_s1'), T_midants1_c3];
     T_midants1_c3.Properties.VariableNames{1} = 'PID';
-    save midouts1_T.mat T_midants1_c3
+    save T_midants1_c3.mat T_midants1_c3
 
     % mid out ses1 c1
     T_midouts1_c1 = [];
@@ -719,7 +720,7 @@ if redo_regions == 1
     pid_midant_s2 = pid_midant_s2(~cellfun('isempty',pid_midant_s2));
     T_midants2_c3 = [cell2table(pid_midant_s2'), T_midants2_c3];
     T_midants2_c3.Properties.VariableNames{1} = 'PID';
-    save midouts2_T.mat T_midants2_c3
+    save T_midants2_c3.mat T_midants2_c3
 
     % mid out ses2 c1
     T_midouts2_c1 = [];

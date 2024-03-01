@@ -4,15 +4,15 @@ savedir = '/Users/zacharyanderson/Documents/ACNlab/RISECREST/RISE/timing_files';
 mid = 1;
 chat = 0;
 chat_matlab = 0;
-make_plot = 0;
+cd(basedir)
 
 if chat == 1
-    fnames = filenames(fullfile(basedir,'sub-*/ses-1/beh/chzc*txt'));
+    fnames = filenames(fullfile('sub-*/ses-1/beh/chzc*txt'));
     keyboard
     for sub = 1:length(fnames)
         txt = readtable(fnames{sub});
         
-        pid{sub} = fnames{sub}(71:75); % RISE %(72:77);% CREST (71:75); %
+        pid{sub} = fnames{sub}(5:9); 
         
         % remove certain fields that make indexing more difficult
          
@@ -81,7 +81,7 @@ if mid == 1
     for sub = 1:length(fnames)
         % Load in the text file
         txt = readtable(fnames{sub});
-        pid{sub} =  fnames{sub}(71:75); % RISE %(72:77);% CREST (71:75); %
+        pid{sub} = fnames{sub}(5:9); 
         
         if isempty(txt) == 0
             
